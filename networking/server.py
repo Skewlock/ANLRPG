@@ -29,7 +29,7 @@ class ClientThread(threading.Thread):
             "login": self.login
             }
         # exécute la commande
-        fnc = comm.get(command, lambda: "Commande invalide")
+        fnc = comm.get(command)
         fnc(args)
     
     def login(self, args): # commande login
