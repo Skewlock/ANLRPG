@@ -1,4 +1,3 @@
-import map.map_5 as map_
 import networking.client as client
 
 
@@ -28,7 +27,7 @@ def menu():  # menu dans la console
 
 
 def game(sock):
-    map_.run()
+    pass
 
 
 menu()
