@@ -36,26 +36,26 @@ import character.character as char
 import map.map as map_
 import gamelogic.mouseclicks as mouseclicks
 import pyglet
+import pyglet.window.mouse as mouse
 
-
-window = pyglet.window.Window(1080, 720)
-character = char.Character(0, 0)
-
-
-@window.event
-def on_mouse_release(x, y, button, modifiers):
-    mouse_ = [x, y, button]
-    if mouse_[2] == mouse.LEFT:
-        mouseclicks.move_character(character)
+window = pyglet.window.Window(1080, 720)  # la fenêtre de pyglet
+character = char.Character(0, 0)  # le personnage (déclaré ici mais peut changer)
 
 
 @window.event
-def on_draw():
+def on_mouse_release(x, y, button, modifiers):  # tout ce qui est lié à la souris
+    mouse_ = [x, y, button]  # on crée une liste d'argument de la souris
+    if mouse_[2] == mouse.LEFT:  # si on clic gauche
+        mouseclicks.move_character(character, mouse_)  # on déplace le personnage
+
+
+@window.event
+def on_draw():  # chaque frame sera gérée ici (d'abord clear puis dessinée encore)
     window.clear()
-    map_.load_map()
+    map_.load_map(window)
 
 
-def run():
+def run():  # on lance le jeu
     pyglet.app.run()
 
 
