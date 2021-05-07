@@ -1,4 +1,4 @@
-import networking.client as client
+"""import networking.client as client
 
 
 def menu():  # menu dans la console
@@ -30,4 +30,33 @@ def game(sock):
     pass
 
 
-menu()
+menu()"""
+
+import character.character as char
+import map.map as map_
+import gamelogic.mouseclicks as mouseclicks
+import pyglet
+
+
+window = pyglet.window.Window(1080, 720)
+character = char.Character(0, 0)
+
+
+@window.event
+def on_mouse_release(x, y, button, modifiers):
+    mouse_ = [x, y, button]
+    if mouse_[2] == mouse.LEFT:
+        mouseclicks.move_character(character)
+
+
+@window.event
+def on_draw():
+    window.clear()
+    map_.load_map()
+
+
+def run():
+    pyglet.app.run()
+
+
+run()
