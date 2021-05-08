@@ -87,16 +87,9 @@ def get_path(visited, coords):
             if i[1] == dist:
                 if is_neighbour(i[0], path[-1]):
                     path.append(i[0])
-    print(reversation(path))
-    return reversation(path)
+    path.reverse()
+    return path
 
-
-def reversation(list):
-    list2 = []
-    for i in range(len(list)):
-        list2.append(list[-i])
-    del list
-    return list2
 
 def is_neighbour(test, base):
     if (test[0] + 1, test[1]) == base or (test[0] - 1, test[1]) == base or (test[0], test[1] + 1) == base or (

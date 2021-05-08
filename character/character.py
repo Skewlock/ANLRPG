@@ -1,6 +1,5 @@
 import pyglet
 from pyglet.gl import *
-import math
 
 
 class Character:
@@ -11,23 +10,26 @@ class Character:
         self.sprite = pyglet.sprite.Sprite(pyglet.resource.image("character/sprites/bonome.png"))  #sprite
 
     def move_character(self, path):
-        print(self.x, self.y)
-        anim_transition = 0.01  # on gère l'animation du personnage (le chemin est géré dans mouseclicks)
+        print("-----------------------------\n", path)
+        anim_transition = 0.1  # faire une transition pour pas avoir de tp case par case
         for case in path:
             print(self.x, self.y)
             if case[0] > self.x:
                 for i in range(10):
                     self.x += anim_transition
-            if case[0] < self.x:
+            elif case[0] < self.x:
                 for i in range(10):
                     self.x -= anim_transition
-            if case[1] > self.x:
+            elif case[1] > self.y:
                 for i in range(10):
                     self.y += anim_transition
-            if case[1] > self.x:
+            elif case[1] > self.y:
                 for i in range(10):
                     self.y -= anim_transition
+            self.x = round(self.x)
+            self.y = round(self.y)
+        print("oui ", self.x, self.y)
 
-    def draw(self):
-        # self.sprite.update() # update le sprite du perso et ça position
-        self.sprite.draw() # dessiner le sprite
+    def draw(self, window):
+        self.sprite.update(x=window.width/2, y=window.height/2)  # update le sprite du perso et ça position
+        self.sprite.draw()  # dessiner le sprite
