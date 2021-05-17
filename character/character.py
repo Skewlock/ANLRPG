@@ -7,7 +7,7 @@ class Character:
     def __init__(self, x, y):
         self.x = x  # position sur la carte
         self.y = y
-        self.sprite = pyglet.sprite.Sprite(pyglet.resource.image("character/sprites/bonome.png"))  #sprite
+        self.image = pyglet.image.load("character/sprites/bonome.png") #sprite
 
     def move_character(self, path):
         print("-----------------------------\n", path)
@@ -28,8 +28,11 @@ class Character:
                     self.y -= anim_transition
             self.x = round(self.x)
             self.y = round(self.y)
-        print("oui ", self.x, self.y)
+            print("oui ", self.x, self.y)
 
     def draw(self, window):
-        self.sprite.update(x=window.width/2, y=window.height/2)  # update le sprite du perso et ça position
+        self.sprite = pyglet.sprite.Sprite(self.image, x = 0 , y = window.height/2 )
+        xpos = self.x * 32 + self.y * 32
+        ypos = window.height/2 + self.x * 16 + self.y * -16 
+        self.sprite.update(x = xpos, y = ypos)  # update le sprite du perso et ça position
         self.sprite.draw()  # dessiner le sprite

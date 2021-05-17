@@ -17,20 +17,21 @@ def get_coords_grid(mouse_):
     print(coords)
     return coords
 
+    
 
 def move_character(character, mouse_):
     coords = get_coords_grid(mouse_)
     visited, coords = search_path(
-        (coords[0] - 11, coords[1] + 11))  # les -11 étaient pour un test, enlever pour la version finale
+        (coords[0] - 11, coords[1] + 11), character)  # les -11 étaient pour un test, enlever pour la version finale
     path = get_path(visited, coords)
     character.move_character(path)
 
 
-def search_path(coords):
+def search_path(coords, character):
     print(coords)
-    visited = {(0, 0): 0}  # changer par les coordonnés du perso
-    traiter = [(0, 0)]
-    current = (0, 0)
+    visited = {(character.x, character.y): 0}  # changer par les coordonnés du perso
+    traiter = [(character.x, character.y)]
+    current = (character.x, character.y)
     while len(traiter) != 0 and current != coords:
         current = traiter[0]
         del traiter[0]
