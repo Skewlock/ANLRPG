@@ -23,7 +23,7 @@ class Character:
             elif case[1] > self.y:
                 for i in range(10):
                     self.y += anim_transition
-            elif case[1] > self.y:
+            elif case[1] < self.y:
                 for i in range(10):
                     self.y -= anim_transition
             self.x = round(self.x)
@@ -31,8 +31,8 @@ class Character:
             print("oui ", self.x, self.y)
 
     def draw(self, window):
-        self.sprite = pyglet.sprite.Sprite(self.image, x = 0 , y = window.height/2 )
-        xpos = self.x * 32 + self.y * 32
-        ypos = window.height/2 + self.x * 16 + self.y * -16 
+        self.sprite = pyglet.sprite.Sprite(self.image, x = 15, y = window.height/2 )
+        xpos = (self.x * 32 + self.y * 32) + 15
+        ypos = (window.height/2 + self.x * 16 + self.y * -16) - 4
         self.sprite.update(x = xpos, y = ypos)  # update le sprite du perso et ça position
         self.sprite.draw()  # dessiner le sprite

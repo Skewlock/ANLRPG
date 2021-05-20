@@ -23,6 +23,8 @@ def move_character(character, mouse_):
     coords = get_coords_grid(mouse_)
     visited, coords = search_path(
         (coords[0] - 11, coords[1] + 11), character)  # les -11 étaient pour un test, enlever pour la version finale
+    if visited is None:
+        return
     path = get_path(visited, coords)
     character.move_character(path)
 
@@ -32,19 +34,19 @@ def search_path(coords, character):
     visited = {(character.x, character.y): 0}  # changer par les coordonnés du perso
     traiter = [(character.x, character.y)]
     current = (character.x, character.y)
-    while len(traiter) != 0 and current != coords:
-        current = traiter[0]
-        del traiter[0]
-        print("visited:", visited)
-        print("traiter", traiter)
-        bords = get_walkable(current)  # les alentour du point
-        for bord in bords:
-            print("bord: ", bord)
-            if not (bord in visited.keys()):  # si la bordure n'est pas déjà traitée
-                traiter.append(bord)
-                visited[bord] = visited[current] + 1
-    print(visited[coords])
-    return visited, coords
+    try:
+        while len(traiter) != 0 and current != coords:
+            current = traiter[0]
+            del traiter[0]
+            bords = get_walkable(current)  # les alentour du point
+            for bord in bords:
+                if not (bord in visited.keys()):  # si la bordure n'est pas déjà traitée
+                    traiter.append(bord)
+                    visited[bord] = visited[current] + 1
+        print(visited[coords])
+        return visited, coords
+    except KeyError:
+        return None, None
 
 
 def valid(point):
@@ -55,12 +57,16 @@ def valid(point):
     fichier_decors = open("map/carte_decors.csv", "r", encoding="utf-8", errors='ignore')  # on crée la carte des décors
     carte_decors = [[int(d) for d in ligne.rstrip().split(";")] for ligne in fichier_decors]
     fichier_decors.close()
-
-    if point[0] >= 0 and point[1] >= 0:
-        if carte[point[0]][point[1]] != 0:
-            if carte_decors[point[0]][point[1]] == 0:
-                return True
-    return False
+    
+    try:
+        if point[0] >= 0 and point[1] >= 0:
+            if carte[point[0]][point[1]] != 0:
+                if carte_decors[point[0]][point[1]] == 0:
+                    return True
+    except IndexError:
+        return False
+    else:
+        return False
 
 
 def get_walkable(point):

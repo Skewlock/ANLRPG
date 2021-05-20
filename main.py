@@ -52,8 +52,8 @@ def on_mouse_release(x, y, button, modifiers):  # tout ce qui est lié à la sou
 @window.event
 def on_draw():  # chaque frame sera gérée ici (d'abord clear puis dessinée encore)
     window.clear()
-    character.draw(window)
     map_.load_map(window)
+    character.draw(window)
 
 
 def run():  # on lance le jeu
