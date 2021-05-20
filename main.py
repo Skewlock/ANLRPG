@@ -54,6 +54,7 @@ def on_draw():  # chaque frame sera gérée ici (d'abord clear puis dessinée en
     window.clear()
     map_.load_map(window)
     character.draw(window)
+    map_.load_decors(window)
 
 
 def run():  # on lance le jeu

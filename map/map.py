@@ -63,4 +63,7 @@ def create_decors(window):
 def load_map(window):
     dic_blocs[8].blit(0, 0)
     create_map(window)
+
+
+def load_decors(window):
     create_decors(window)
