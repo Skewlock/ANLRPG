@@ -35,18 +35,20 @@ menu()"""
 import character.character as char
 import map.map as map_
 import gamelogic.mouseclicks as mouseclicks
+import fight.ennemies as ennemies
 import pyglet
 import pyglet.window.mouse as mouse
 
 window = pyglet.window.Window(1080, 720)  # la fenêtre de pyglet
 character = char.Character(0, 0)  # le personnage (déclaré ici mais peut changer)
+john = ennemies.John(1, 10, 1, 0)
 
 
 @window.event
 def on_mouse_release(x, y, button, modifiers):  # tout ce qui est lié à la souris
     mouse_ = [x, y, button]  # on crée une liste d'argument de la souris
     if mouse_[2] == mouse.LEFT:  # si on clic gauche
-        mouseclicks.move_character(character, mouse_)  # on déplace le personnage
+        mouseclicks.move_character(character, mouse_, window)  # on déplace le personnage
 
 
 @window.event
@@ -54,6 +56,7 @@ def on_draw():  # chaque frame sera gérée ici (d'abord clear puis dessinée en
     window.clear()
     map_.load_map(window)
     character.draw(window)
+    john.draw(window)
     map_.load_decors(window)
 
 

@@ -9,7 +9,7 @@ class Character:
         self.y = y
         self.image = pyglet.image.load("character/sprites/bonome.png") #sprite
 
-    def move_character(self, path):
+    def move_character(self, path, window):
         print("-----------------------------\n", path)
         anim_transition = 0.1  # faire une transition pour pas avoir de tp case par case
         for case in path:

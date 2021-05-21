@@ -19,14 +19,14 @@ def get_coords_grid(mouse_):
 
     
 
-def move_character(character, mouse_):
+def move_character(character, mouse_, window):
     coords = get_coords_grid(mouse_)
     visited, coords = search_path(
         (coords[0] - 11, coords[1] + 11), character)  # les -11 étaient pour un test, enlever pour la version finale
     if visited is None:
         return
     path = get_path(visited, coords)
-    character.move_character(path)
+    character.move_character(path, window)
 
 
 def search_path(coords, character):
