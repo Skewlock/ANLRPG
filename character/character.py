@@ -7,6 +7,7 @@ class Character:
     def __init__(self, x, y):
         self.x = x  # position sur la carte
         self.y = y
+        self.casting = False
         self.image = pyglet.image.load("character/sprites/bonome.png") #sprite
 
     def move_character(self, path, window):
@@ -36,3 +37,10 @@ class Character:
         ypos = (window.height/2 + self.x * 16 + self.y * -16) - 4
         self.sprite.update(x = xpos, y = ypos)  # update le sprite du perso et ça position
         self.sprite.draw()  # dessiner le sprite
+    
+    def cast_spell(self):
+        self.casting = True
+        
+    def get_target(self, coords, map_):
+        pass
+        

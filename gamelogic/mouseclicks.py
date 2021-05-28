@@ -19,8 +19,10 @@ def get_coords_grid(mouse_):
 
     
 
-def move_character(character, mouse_, window):
+def move_character(character, mouse_, window, ennemy=None):
     coords = get_coords_grid(mouse_)
+    if (coords[0]-11, coords[1]+11) == (ennemy.x, ennemy.y):
+        return
     visited, coords = search_path(
         (coords[0] - 11, coords[1] + 11), character)  # les -11 étaient pour un test, enlever pour la version finale
     if visited is None:

@@ -15,4 +15,3 @@ class Morsure(Spell):
     
     def __init__(self, n, t, d, r):
         Spell.__init__(n,t,d,r)
-        
